@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+}
+
+.small-icon {
+    width: 30px;
+    height: 30px;
+}
+  
+.rounded-icon {
+    border-radius: 50%;
+}
+  
+.large-icon {
+    width: 100px;
+    height: 100px;
+}
+
+.support-section {
+    background-color: #1b1d24;
+    padding: 15px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 20px 0 20px;
+}
+
+.support-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 100px;
+}
+
+.container-icon {
+    background-color: #22242d;
+    border-radius: 12px;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-icon ion-icon {
+    font-size: 64px;
+}
+
+.top-text h1 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.top-text p {
+    color: #9ea7b1;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.personal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.personal-content ion-item {
+    --background: #22242d;
+    --color: white;
+    --border-radius: 12px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+
+.personal-content ion-item ion-button {
+    --color: white;
+    font-size: 20px;
+    width: 60px;
+    height: 100%;
+    --background-hover: transparent;
+}
+
+.redirect {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: inherit;
+    height: 30px;
+    width: 200px;
+    --color: white;
+    --background: #237bff;
+}
+
+.alt {
+    --color: #237bff;
+    --background: #29374d;
+}

@@ -1,0 +1,7 @@
+{
+    "/v3": {
+      "target": "https://api.pricempire.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }

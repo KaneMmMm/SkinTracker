@@ -1,0 +1,83 @@
+<app-common-header></app-common-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="support-section">
+    <div class="support-header">
+      <ng-container *ngIf="currentUser; else noUser">
+        <div class="container-icon" (click)="triggerFileInput()">
+          <ion-img
+            *ngIf="currentUser.profilePic; else defaultIcon"
+            [src]="currentUser.profilePic"
+            class="rounded-icon"
+          ></ion-img>
+          <ng-template #defaultIcon>
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ng-template>
+        </div>
+        <div class="top-text">
+          <h1>{{ currentUser.username }}</h1>
+          <p>{{ currentUser.email }}</p>
+          <p>{{ currentUser.phoneNumber }}</p>
+          <p>{{ currentUser.tradeLink }}</p>
+        </div>
+      </ng-container>
+      <ng-template #noUser>
+        <div class="container-icon">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div class="top-text">
+          <h1>Profile</h1>
+        </div>
+      </ng-template>
+    </div>
+    <div class="support-content">
+      <ng-container *ngIf="!currentUser; else loggedIn">
+        <ion-button class="redirect" (click)="goLogin()">LOGIN</ion-button>
+        <ion-button class="redirect alt" (click)="goRegister()">REGISTER</ion-button>
+      </ng-container>
+      <ng-template #loggedIn>
+        <ion-button class="redirect" (click)="logOut()">LOGOUT</ion-button>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="support-section">
+    <div class="support-header">
+      <div class="container-icon">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+      <div class="top-text">
+        <h1>Personal Info</h1>
+        <p>Enter and change your personal information here.</p>
+      </div>
+    </div>
+      <div class="personal-content">
+        <ion-item>
+          <ion-input label="Trade Link" labelPlacement="stacked" placeholder="https://steamcommunity.com/tradeoffer/new/?partner"></ion-input>
+          <ion-button slot="end" fill="clear" (click)="submitTradeLink()">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-input label="E-Mail" labelPlacement="stacked" placeholder="Your Email"></ion-input>
+          <ion-button slot="end" fill="clear" (click)="submitEmail()">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Phone Number" labelPlacement="stacked" placeholder="Your Phone Number"></ion-input>
+          <ion-button slot="end" fill="clear" (click)="submitPhoneNumber()">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+  </div>
+
+  <input #fileInput type="file" accept="image/*" style="display: none" (change)="handleFileInput($event)" />
+</ion-content>

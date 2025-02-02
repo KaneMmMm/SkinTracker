@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goTab1()">
+        <ion-img src="assets/icon/favicon.png" class="small-icon"></ion-img>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>SkinTracker</ion-title>
+    <ion-buttons slot="end">
+      {{ currentUser?.username }}
+      <ion-button (click)="goTab4()">
+        <ion-img [src]="currentUser?.profilePic ? currentUser.profilePic : 'assets/icon/favicon.png'" 
+                 class="small-icon rounded-icon"></ion-img>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
