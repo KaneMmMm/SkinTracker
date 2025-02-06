@@ -81,7 +81,77 @@ body {
     --background: #237bff;
 }
 
-.alt {
+.redirect.alt {
     --color: #237bff;
     --background: #29374d;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    background: #1a1a1a;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.ticket-row {
+    display: flex;
+    justify-content: space-between;
+    background: #222;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.ticket-column {
+    flex: 1;
+    text-align: center;
+}
+
+ion-item {
+    --background: transparent;
+    --color: white;
+}
+
+ion-list {
+    background: transparent;
+}
+
+.ticket-list {
+    background-color: #22242d;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.ticket-list ion-item {
+    --background: transparent;
+    border-bottom: 1px solid #29374d;
+    padding: 10px 0;
+}
+
+.ticket-list ion-item:last-child {
+    border-bottom: none;
+}
+
+.ticket-list ion-label h2 {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.ticket-list ion-label p {
+    color: #9ea7b1;
+    margin: 0;
+}
+
+
+#Solved {
+    color: #00ff00;
+}
+
+#notSolved {
+    color: #ff0000;
 }

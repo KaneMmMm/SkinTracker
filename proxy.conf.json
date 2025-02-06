@@ -3,5 +3,14 @@
       "target": "https://api.pricempire.com",
       "secure": false,
       "changeOrigin": true
+    },
+    "/api": {
+      "target": "https://steamcommunity.com",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }      
     }
+
   }

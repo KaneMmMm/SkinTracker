@@ -19,7 +19,7 @@
     </div>
     <div class="support-content">
       <div class="redirect-buttons">
-        <ion-button class="redirect">Contact Support</ion-button>
+        <ion-button class="redirect" (click)="openModal()">Contact Support</ion-button>
         <ion-button class="redirect alt">Visit FAQ</ion-button>
       </div>
     </div>
@@ -35,5 +35,64 @@
         <p>View and manage your support tickets.</p>
       </div>
     </div>
+    <div class="ticket-list" *ngIf="tickets.length > 0">
+      <ion-list>
+        <ion-item lines="none" class="ticket-header">
+          <ion-label class="ticket-column"><strong>ID</strong></ion-label>
+          <ion-label class="ticket-column"><strong>CREATED</strong></ion-label>
+          <ion-label class="ticket-column"><strong>SUBJECT</strong></ion-label>
+          <ion-label class="ticket-column"><strong>STATUS</strong></ion-label>
+        </ion-item>
+        <ion-item *ngFor="let ticket of tickets" class="ticket-row">
+          <ion-label class="ticket-column">TICKET-{{ ticket.ticketID | slice:-5 }}</ion-label>
+          <ion-label class="ticket-column">{{ ticket.date | date:'short' }}</ion-label>
+          <ion-label class="ticket-column">{{ ticket.subject }}</ion-label>
+          <ion-label class="ticket-column">
+            <ng-container *ngIf="ticket.solved; else notSolved">
+              <ion-icon id="Solved" name="checkmark-circle-outline"></ion-icon>
+            </ng-container>
+            <ng-template #notSolved>
+              <ion-icon id="notSolved" name="close-circle-outline"></ion-icon>
+            </ng-template>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
+
+
+ 
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Contact Support</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <form (ngSubmit)="submitSupportForm()" #supportForm="ngForm">
+          <ion-item>
+            <ion-label position="stacked">Your Name</ion-label>
+            <ion-input type="text" required [(ngModel)]="supportFormData.name" name="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Your Email</ion-label>
+            <ion-input type="email" required [(ngModel)]="supportFormData.email" name="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Subject</ion-label>
+            <ion-input type="text" required pattern="^[A-Za-z]{1,12}$" maxlength="12" title="Subject must be one word (A-Z only) and up to 12 letters long" [(ngModel)]="supportFormData.subject" name="subject"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Message</ion-label>
+            <ion-textarea required [(ngModel)]="supportFormData.message" name="message"></ion-textarea>
+          </ion-item>
+          <ion-button expand="full" type="submit">Send</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

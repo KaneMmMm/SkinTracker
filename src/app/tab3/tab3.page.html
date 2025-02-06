@@ -1,12 +1,88 @@
 <app-common-header></app-common-header>
 
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="redirect-buttons">
+    <ion-button [disabled]="!currentUser" class="redirect" expand="block" (click)="onImportInventory()">IMPORT YOUR INVENTORY</ion-button>
+    <ion-button disabled class="redirect alt" expand="block">ADD MANUALLY</ion-button>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="weapon-container">
+    <div *ngIf="!currentUser" class="empty-message">
+      You need to login to see your inventory
+    </div>
+    <div *ngIf="currentUser && (!savedInventory || savedInventory.length === 0)" class="empty-message">
+      Sooo empty..... Import your inventory to see your skins here or add the skins manually!
+    </div>
+    <div *ngFor="let item of savedInventory" class="weapon-box" [ngClass]="{'remove-selected': isEditingInventory && item.selected}" (click)="toggleSelection(item)">
+      <div class="weapon-image">
+        <img [src]="'http://cdn.steamcommunity.com/economy/image/' + item.icon_url" alt="{{ item.name }}">
+      </div>
+      <div class="weapon-info">
+        <div class="exteriortest" [style.background-color]="getRarityColor(item.type)"></div>
+        <h3>{{ item.name }}</h3>
+        <p>Exterior: {{ getExteriorTag(item.tags) }}</p>
+        <div class="float-value">
+          <span>{{ getExteriorFloat(item.tags) }}</span>
+          <div class="float-bar">
+            <div class="float-indicator" [style.left]="getExteriorFloat(item.tags) * 100 + '%'"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="redirect-buttons-edit">
+    <ion-button class="redirect danger" [disabled]="!currentUser" expand="block" (click)="isEditingInventory = !isEditingInventory">EDIT INVENTORY</ion-button>
+    <ion-button *ngIf="isEditingInventory" class="redirect danger" [disabled]="!currentUser" expand="block" (click)="removeSelectedSkins()">REMOVE</ion-button>
+  </div>
+
+  <ion-modal [isOpen]="showTradeLinkModal" (didDismiss)="showTradeLinkModal = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Set your Trade Link to import your inventory</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input placeholder="Enter Trade Link" [(ngModel)]="tradeLink"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="submitTradeLinkModal()">SUBMIT</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="showFilteredDataModal" (didDismiss)="showFilteredDataModal = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Filtered Inventory Data</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="showFilteredDataModal = false">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div *ngIf="filteredData">
+          <div class="weapon-container">
+            <div *ngFor="let item of filteredData" [ngClass]="{
+              'covert': item.type.includes('Covert'),
+              'classified': item.type.includes('Classified'),
+              'restricted': item.type.includes('Restricted'),
+              'mil-spec': item.type.includes('Mil-Spec'),
+              'selected': item.selected
+            }" class="weapon-box" (click)="toggleSelection(item)">
+              <h3> {{ item.name }} </h3>
+              <img [src]="'http://cdn.steamcommunity.com/economy/image/' + item.icon_url" alt="{{ item.name }}">
+              <p>Type: {{ item.type }}</p>
+              <p>Exterior: {{ getExteriorTag(item.tags) }}</p>
+              <ion-checkbox style="display: none;" slot="start" [(ngModel)]="item.selected"></ion-checkbox>
+            </div>
+          </div>
+          <ion-button expand="full" (click)="saveSelectedSkins()">SUBMIT</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

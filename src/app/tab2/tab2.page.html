@@ -1,15 +1,38 @@
 <app-common-header></app-common-header>
 
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item>
+    <ion-input placeholder="Search skins" [(ngModel)]="searchTerm" (ionInput)="onSearchTermChange()"></ion-input>
+  </ion-item>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-  <div *ngIf="apiData">
-    <pre>{{ apiData | json }}</pre>
+  <div class="weapon-container" *ngIf="apiData?.descriptions?.length; else noData">
+    <div *ngFor="let item of getPaginatedWeapons()" class="weapon-box">
+      <div class="weapon-image">
+        <img [src]="getIconUrl(item)" alt="{{ item.name }}">
+      </div>
+      <div class="weapon-info">
+        <h3>{{ item.name }} | {{ item.type }}</h3>
+        <p>Exterior: {{ getExteriorTag(item.tags) }}</p>
+        <div class="float-value">
+          <span>{{ getExteriorFloat(item.tags) }}</span>
+          <div class="float-bar">
+            <div class="float-indicator" [style.left]="getExteriorFloat(item.tags) * 100 + '%'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="pagination-controls" *ngIf="totalPages > 1">
+    <ion-button (click)="prevPage()" [disabled]="currentPage === 1">Previous</ion-button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <ion-button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</ion-button>
+  </div>
+
+  <ng-template #noData>
+    <div class="empty-message">
+      Loading skins <br><br>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  </ng-template>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonImg } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonImg, IonIcon } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './common-header.component.html',
   styleUrls: ['./common-header.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonImg]
+  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonImg, IonIcon],
 })
 export class CommonHeaderComponent implements OnInit, OnDestroy {
   currentUser: any;

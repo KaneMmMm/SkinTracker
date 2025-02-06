@@ -21,6 +21,9 @@ export class RegisterPage implements OnInit {
   confirmPassword = '';
   errorMessage = '';
   profilePic: string = '';
+  phoneNumber: string = '';
+  tradeLink: string = '';
+
   constructor(private storage: Storage, private router: Router) { }
   
   async ngOnInit() {

@@ -9,10 +9,13 @@
     <ion-buttons slot="end">
       {{ currentUser?.username }}
       <ion-button (click)="goTab4()">
-        <ion-img [src]="currentUser?.profilePic ? currentUser.profilePic : 'assets/icon/favicon.png'" 
-                 class="small-icon rounded-icon"></ion-img>
+        <ng-container *ngIf="currentUser?.profilePic; else defaultIcon">
+          <ion-img [src]="currentUser.profilePic" class="small-icon rounded-icon"></ion-img>
+        </ng-container>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-circle-outline" class="small-icon"></ion-icon>
+        </ng-template>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-

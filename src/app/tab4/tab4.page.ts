@@ -13,10 +13,13 @@ import { Storage } from '@ionic/storage-angular';
   templateUrl: './tab4.page.html',
   styleUrls: ['./tab4.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonButton, IonInput, IonItem, IonImg, CommonModule, FormsModule, CommonHeaderComponent]
+  imports: [IonContent, IonIcon, IonButton, IonInput, IonItem, IonImg, CommonModule, FormsModule, CommonHeaderComponent]
 })
 export class Tab4Page implements OnInit {
   currentUser: any = null;
+  phoneNumber: string = '';
+  tradeLink: string = '';
+  email: string = '';
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor(private router: Router, private authService: AuthService, private storage: Storage) {}
@@ -71,21 +74,21 @@ export class Tab4Page implements OnInit {
 
   async submitTradeLink() {
     if (this.currentUser) {
-      this.currentUser.tradeLink = this.submitTradeLink;
+      this.currentUser.tradeLink = this.tradeLink;
       await this.updateUser();
     }
   }
 
   async submitEmail() {
     if (this.currentUser) {
-      this.currentUser.email = this.submitEmail;
+      this.currentUser.email = this.email;
       await this.updateUser();
     }
   }
 
   async submitPhoneNumber() {
     if (this.currentUser) {
-      this.currentUser.phoneNumber = this.submitPhoneNumber;
+      this.currentUser.phoneNumber = this.phoneNumber;
       await this.updateUser();
     }
   }

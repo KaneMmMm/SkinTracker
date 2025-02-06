@@ -66,6 +66,14 @@ body {
     gap: 20px;
 }
 
+.personal-content a {
+    font-size: 12px;
+    display: block;
+    margin-left: 5px;
+    margin-top: -15px;
+    text-decoration: none;
+}
+
 .personal-content ion-item {
     --background: #22242d;
     --color: white;
