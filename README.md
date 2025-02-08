@@ -1,6 +1,6 @@
 # SkinTracker
 
-SkinTracker is an Ionic Angular application designed to provide advanced tracking tools for CS2 skins. This project includes features such as user authentication, inventory management, and support ticketing.
+SkinTracker is an Ionic Angular application designed to provide advanced tracking tools for CS2 skins.
 
 ## Getting Started
 
